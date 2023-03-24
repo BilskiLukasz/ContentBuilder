@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Maps Block</title>
+		<style>
+			.drop-zone {
+				background-color: rgb(123, 123, 123);
+				width:50%;
+				text-align: center;
+				min-height:10px;
+				display: inline-block;
+			}
+
+			.items {
+				width: 200px;
+				border-radius: 5px;
+				margin: 5px auto;
+				background-color: white;
+				padding: 20px 0;
+			}
+
+			.remove {
+				padding: 4px;
+				margin-left: 10px;
+				cursor: pointer;
+				background-color: black;
+				color: white;
+			}
+
+		
+		</style>
+	</head>
+	<body>
+		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+		<div id="app">	
+
+			<div class="elements drop-zone">
+				<div v-for="item in listItems" :key="item.id" >
+					<p class="items" draggable="true" :itemid="item.id" @dragstart="startDrag($event)">{{item.id}} || {{item.title}}</p>
+				</div>
+			</div>
+			<div class="ready drop-zone">
+				<div style="height:8px; width: 100%;background-color: red;" @drop="onDrop($event, index)" @dragenter.prevent @dragover.prevent></div>
+				<div v-for="(item, index) in listSelected" :key="index">
+					<p class="items" @dragstart="startDrag($event, index)" draggable="true">{{item.id}} || {{item.title}}<span @click="remove(index)" class="remove">X</span></p>
+					<div style="height:8px; width: 100%; background-color: green;" @drop="onDrop($event, index)" @dragenter.prevent @dragover.prevent></div>
+				</div>				
+			</div>
+			{{message}}
+			<input v-model="text" @input="printData"/>
+			{{text}}
+		</div>
+		<script src="./main.js"></script>
+	</body>
+</html>

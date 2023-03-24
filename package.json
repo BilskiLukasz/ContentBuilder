@@ -1,0 +1,21 @@
+{
+  "name": "contentblock",
+  "version": "1.0",
+  "description": "Enverta Content Builder Block",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack && node app.js",
+    "build": "webpack"
+  },
+  "author": "Lukasz Bilski",
+  "license": "ISC",
+  "dependencies": {
+    "blocksdk": "^1.0.0",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "webpack": "^3.10.0",
+    "webpack-css-loaders": "^1.0.0"
+  }
+}
