@@ -13,7 +13,7 @@ createApp({
 		text:"",
 		listBlocks: [],
 		listItems: [{id:10,title:'<div>item10</div>'},{id:11,title:"<div>item11</div>"},{id:12,title:"<div>item12</div>"},{id:13,title:"<div>item13</div>"},{id:14,title:"<div>item14</div>"},{id:15,title:"<div>item15</div>"},{id:16,title:"<div>item16</div>"}],
-		listSelected: [{id:10,title:'<div>item10</div>'},{id:11,title:"<div>item11</div>"}]
+		listSelected: [{id:10,title:'<div>item10</div>'}]
 	  }
 	},
 	methods: {
