@@ -69,7 +69,12 @@
 
 
 var SDK = __webpack_require__(1);
-const sdk = new SDK({tabs: ['htmlblock']}, null, true);
+const sdk = new SDK({
+	blockEditorWidth: 600,
+	tabs: [
+		'htmlblock', // This is the HTML Editor Tab
+		'stylingblock' // This is the styling tab
+	]});
 
 const { createApp } = Vue
 

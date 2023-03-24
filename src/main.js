@@ -1,6 +1,11 @@
 
 var SDK = require('blocksdk');
-const sdk = new SDK({tabs: 'htmlblock'});
+const sdk = new SDK({
+	blockEditorWidth: 600,
+	tabs: [
+		'htmlblock', // This is the HTML Editor Tab
+		'stylingblock' // This is the styling tab
+	]});
 
 const { createApp } = Vue
 
