@@ -69,8 +69,7 @@
 
 
 var SDK = __webpack_require__(1);
-var sdk = new SDK(null, null, true); // 3rd argument true bypassing https requirement: not prod worthy
-
+const sdk = new SDK({tabs: ['htmlblock']}, null, true);
 
 const { createApp } = Vue
 
@@ -82,8 +81,13 @@ createApp({
 		text:"",
 		listBlocks: [],
 		listItems: [{id:10,title:'<div>item10</div>'},{id:11,title:"<div>item11</div>"},{id:12,title:"<div>item12</div>"},{id:13,title:"<div>item13</div>"},{id:14,title:"<div>item14</div>"},{id:15,title:"<div>item15</div>"},{id:16,title:"<div>item16</div>"}],
-		listSelected: [{id:10,title:'<div>item10</div>'},{id:11,title:"<div>item11</div>"}]
+		listSelected: [{id:10,title:'<div>item10</div>'}]
 	  }
+	},
+	mounted() {
+		sdk.getData((data) => {
+			console.log(data)
+		})
 	},
 	methods: {
   
@@ -94,7 +98,7 @@ createApp({
   
 		  this.listSelected.forEach(el => outputString += el.title)
   
-		  sdk.setData(this.listSelected.map((el) => {return {"id": el.id, "text": el.title}}))
+		  sdk.setData({"items" : this.listSelected.map((el) => {return {"id": el.id, "text": el.title}})})
 		  sdk.setContent(outputString)
   
 	  },
@@ -140,10 +144,12 @@ createApp({
 	  },
   
 	  remove (index) {
-		  console.log(index)
+		  this.listSelected.splice(index,1)
+		this.setBuilderContent()
 	  }
 	},
   }).mount('#app')
+
 
 /***/ }),
 /* 1 */

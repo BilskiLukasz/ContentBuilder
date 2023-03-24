@@ -1,7 +1,6 @@
 
 var SDK = require('blocksdk');
-var sdk = new SDK(null, null, true); // 3rd argument true bypassing https requirement: not prod worthy
-
+const sdk = new SDK({tabs: 'htmlblock'});
 
 const { createApp } = Vue
 
@@ -16,6 +15,11 @@ createApp({
 		listSelected: [{id:10,title:'<div>item10</div>'}]
 	  }
 	},
+	mounted() {
+		sdk.getData((data) => {
+			console.log(data)
+		})
+	},
 	methods: {
   
 	  setBuilderContent() {
@@ -25,7 +29,7 @@ createApp({
   
 		  this.listSelected.forEach(el => outputString += el.title)
   
-		  sdk.setData(this.listSelected.map((el) => {return {"id": el.id, "text": el.title}}))
+		  sdk.setData({"items" : this.listSelected.map((el) => {return {"id": el.id, "text": el.title}})})
 		  sdk.setContent(outputString)
   
 	  },
@@ -71,7 +75,8 @@ createApp({
 	  },
   
 	  remove (index) {
-		  console.log(index)
+		  this.listSelected.splice(index,1)
+		this.setBuilderContent()
 	  }
 	},
   }).mount('#app')
