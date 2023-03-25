@@ -82,19 +82,25 @@ const { createApp } = Vue
 createApp({
 	data() {
 	  return {
-		message: 'Hello Vue!',
-		text:"",
-		listBlocks: [],
+		listTemplates: [{name: "service", "items" : ["pre3", "head3", "body3"]},{name: "marketing1", "items" : ["pre1", "head1", "body1"]},{name: "marketing2", "items" : ["pre2", "head2", "body2"]}],
+		preheader: [{id:"pre1",title:'<div>preheader1</div>'},{id:"pre2",title:'<div>preheader2</div>'},{id:"pre3",title:'<div>preheader3</div>'},{id:"pre4",title:'<div>preheader4</div>'},],
+		header: [{id:"head1",title:'<div>header1</div>'},{id:"head2",title:'<div>header2</div>'},{id:"head3",title:'<div>header3</div>'},{id:"head4",title:'<div>header4</div>'}],
+		body: [{id:"body1",title:'<div>body1</div>'},{id:"body2",title:'<div>body2</div>'},{id:"body3",title:'<div>body3</div>'},{id:"body4",title:'<div>bodyr4</div>'}],
 		listItems: [{id:10,title:'<div>item10</div>'},{id:11,title:"<div>item11</div>"},{id:12,title:"<div>item12</div>"},{id:13,title:"<div>item13</div>"},{id:14,title:"<div>item14</div>"},{id:15,title:"<div>item15</div>"},{id:16,title:"<div>item16</div>"}],
-		listSelected: [{id:10,title:'<div>item10</div>'}]
+		listSelected: []
 	  }
 	},
-	mounted() {
-		sdk.getData((data) => {
-			console.log(data)
-		})
-	},
 	methods: {
+
+		fillBlockList(snippet) {
+			const arrayToSwap = this.$data[`${snippet.toLowerCase()}`]
+			this.listItems = arrayToSwap.slice(0)
+		},
+
+		fillTemplateList(input) {
+			const template = document.querySelector(`#${input}`).value
+			this.listTemplates.filter((el) => {if(el.name == template) this.$data["preheader"].map()})
+		},
   
 	  setBuilderContent() {
   
@@ -119,8 +125,14 @@ createApp({
 			  event.dataTransfer.setData("itemID", indexItem)
 		  }
 	  },
+
+	  dragHover(event) {
+		event.preventDefault()
+		event.target.classList.toggle("drop-zone-hover")
+	  },
   
 	  onDrop(event, toIndex) {
+		event.target.classList.toggle("drop-zone-hover")
 		  
 		  if(event.dataTransfer.getData("newItem") == "true") {
   

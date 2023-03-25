@@ -1,21 +1,39 @@
-<!DOCTYPE html>
+<!DOCTYPE>
 <html>
 	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Maps Block</title>
 		<style>
-			.drop-zone {
-				background-color: rgb(123, 123, 123);
+
+			body {
+				background-color: rgb(215, 213, 213);
+			}
+
+			#app {
+				width: 640px;
+				
+				margin: 0 auto;
+				padding: 10px;
+			}
+			.preview {
 				width:50%;
 				text-align: center;
 				min-height:10px;
 				display: inline-block;
+				vertical-align: top;
+			}
+
+			.preview .items {
+				margin: 5px auto;
 			}
 
 			.items {
-				width: 200px;
+				width: 80%;
 				border-radius: 5px;
-				margin: 5px auto;
 				background-color: white;
+				margin: 0 auto;
 				padding: 20px 0;
 			}
 
@@ -27,30 +45,88 @@
 				color: white;
 			}
 
-		
+			.menu {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+			}
+
+			.menu-item {
+				display: grid;
+				grid-template-columns: 2fr 1fr;
+				
+			}
+
+			select {
+				border-radius: 5px;
+			}
+
+			.btn {
+				border: none;
+				background-color: #00A1E0;
+				padding: 8px 26px;
+				border-radius: 5px;
+				color: white;
+				cursor: pointer;
+				margin-left: 20px;
+			}
+
+			.drop-zone {
+				min-height: 6px;
+				width: 100%;
+				background-color: rgba(255,255,255,0.6);
+				transition: all 0.1s ease-in-out;
+				border-radius: 2px;
+				margin: 2px auto;
+			}
+
+			.drop-zone-hover {
+				min-height: 20px;
+			}
+
 		</style>
 	</head>
 	<body>
 		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
 		<div id="app">	
+			<div class="menu">				
+				<fieldset class="menu-item">
+					<legend>Choose Content Blocks</legend>
+					<select name="" id="" @change="fillBlockList($event.target.value)">						
+						<option value="Preheader" selected>Preheader</option>
+						<option value="Header">Header</option>						
+						<option value="Body">Body</option>
+						<option value="Rating/Social/Legal">Rating/Social/Legal</option>
+					</select>
+				</fieldset>
+				<fieldset class="menu-item">
+					<legend>Choose Template</legend>
+					<select name="" id="template">
+						<option value="custom" selected>Custom</option>
+						<option value="service">Service Email</option>						
+						<option value="marketing1">Marketing Header Img</option>
+						<option value="marketing2">Marketing no Img</option>
+					</select>
+					<button class="btn" @click="fillTemplateList('template')">Submit</button>	
+				</fieldset>
+			</div>
 
-			<div class="elements drop-zone">
+			<div class="elements preview">
 				<div v-for="item in listItems" :key="item.id" >
 					<p class="items" draggable="true" :itemid="item.id" @dragstart="startDrag($event)">{{item.id}} || {{item.title}}</p>
 				</div>
 			</div>
-			<div class="ready drop-zone">
-				<div style="height:8px; width: 100%;background-color: red;" @drop="onDrop($event, index)" @dragenter.prevent @dragover.prevent></div>
+			<div class="ready preview">
+
+				<div class="drop-zone" @drop="onDrop($event, index)" @dragenter="dragHover($event)" @dragleave="dragHover($event)" @dragover.prevent><span v-if="listSelected.length === 0"><br>Put your block here<br>&nbsp;</span></div>
 				<div v-for="(item, index) in listSelected" :key="index">
 					<p class="items" @dragstart="startDrag($event, index)" draggable="true">{{item.id}} || {{item.title}}<span @click="remove(index)" class="remove">X</span></p>
-					<div style="height:8px; width: 100%; background-color: green;" @drop="onDrop($event, index)" @dragenter.prevent @dragover.prevent></div>
+					<div class="drop-zone" @drop="onDrop($event, index)" @dragenter="dragHover($event)" @dragleave="dragHover($event)" @dragover.prevent></div>
 				</div>				
 			</div>
-			{{message}}
-			<input v-model="text" @input="printData"/>
-			{{text}}
 		</div>
 		<script src="./main.js"></script>
 	</body>
 </html>
+
+<!DOCTYPE html>
