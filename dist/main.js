@@ -65,12 +65,25 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modules_preheader__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_listTemplates__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_body__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_header__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_logo__ = __webpack_require__(5);
 
 
-var SDK = __webpack_require__(1);
+
+
+
+
+
+
+var SDK = __webpack_require__(6);
 const sdk = new SDK({
-	blockEditorWidth: 600,
 	tabs: [
 		'htmlblock', // This is the HTML Editor Tab
 		'stylingblock' // This is the styling tab
@@ -82,14 +95,23 @@ const { createApp } = Vue
 createApp({
 	data() {
 	  return {
-		listTemplates: [{name: "service", "items" : ["pre3", "head3", "body3"]},{name: "marketing1", "items" : ["pre1", "head1", "body1"]},{name: "marketing2", "items" : ["pre2", "head2", "body2"]}],
-		preheader: [{id:"pre1",title:'<div>preheader1</div>'},{id:"pre2",title:'<div>preheader2</div>'},{id:"pre3",title:'<div>preheader3</div>'},{id:"pre4",title:'<div>preheader4</div>'},],
-		header: [{id:"head1",title:'<div>header1</div>'},{id:"head2",title:'<div>header2</div>'},{id:"head3",title:'<div>header3</div>'},{id:"head4",title:'<div>header4</div>'}],
-		body: [{id:"body1",title:'<div>body1</div>'},{id:"body2",title:'<div>body2</div>'},{id:"body3",title:'<div>body3</div>'},{id:"body4",title:'<div>bodyr4</div>'}],
-		listItems: [{id:10,title:'<div>item10</div>'},{id:11,title:"<div>item11</div>"},{id:12,title:"<div>item12</div>"},{id:13,title:"<div>item13</div>"},{id:14,title:"<div>item14</div>"},{id:15,title:"<div>item15</div>"},{id:16,title:"<div>item16</div>"}],
+		listTemplates: [],
+		preheader: [],
+    	logo: [],
+		header: [],
+		body: [],
+		listItems: [],
 		listSelected: []
 	  }
 	},
+  mounted() {
+	this.logo = __WEBPACK_IMPORTED_MODULE_4__modules_logo__["a" /* default */].slice(0)
+	this.preheader = __WEBPACK_IMPORTED_MODULE_0__modules_preheader__["a" /* default */].slice(0)
+	this.header = __WEBPACK_IMPORTED_MODULE_3__modules_header__["a" /* default */].slice(0)
+	this.body = __WEBPACK_IMPORTED_MODULE_2__modules_body__["a" /* default */].slice(0)
+	this.listTemplates = __WEBPACK_IMPORTED_MODULE_1__modules_listTemplates__["a" /* default */].slice(0)
+    this.fillBlockList("preheader")
+  },
 	methods: {
 
 		fillBlockList(snippet) {
@@ -98,18 +120,39 @@ createApp({
 		},
 
 		fillTemplateList(input) {
-			const template = document.querySelector(`#${input}`).value
-			this.listTemplates.filter((el) => {if(el.name == template) this.$data["preheader"].map()})
+
+      this.listSelected.length = 0;
+      
+      const template = this.listTemplates.filter(el => {if (el.name == document.querySelector(`#${input}`).value) return el})
+
+      const tempObj = JSON.parse(JSON.stringify(template))[0];
+
+      for (const key in tempObj) {
+        if ( key != "name") {
+          this.$data[key].map(el => {
+            tempObj[key].forEach(element => {
+              if (element == el.id) {
+                this.listSelected.push(el)
+              }
+            })
+          })
+        }
+      }
+
+      this.setBuilderContent()
 		},
+
+
+		
   
 	  setBuilderContent() {
   
   
 		  var outputString = "";
   
-		  this.listSelected.forEach(el => outputString += el.title)
+		  this.listSelected.forEach(el => outputString += el.content)
   
-		  sdk.setData({"items" : this.listSelected.map((el) => {return {"id": el.id, "text": el.title}})})
+		  sdk.setData({"items" : this.listSelected.map((el) => {return {"id": el.id, "text": el.content}})})
 		  sdk.setContent(outputString)
   
 	  },
@@ -167,9 +210,121 @@ createApp({
 	},
   }).mount('#app')
 
-
 /***/ }),
 /* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+const preheader = [
+    {id:"pre1",content:'<div>preheader1</div>'},
+    {id:"pre2",content:'<div>preheader2</div>'},
+    {id:"pre3",content:'<div>preheader3</div>'},
+    {id:"pre4",content:'<div>preheader4</div>'},
+]
+
+/* harmony default export */ __webpack_exports__["a"] = (preheader);
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+const listTemplates = [
+    {name: "service", 
+    "preheader" : ["pre3"], 
+    "header" : ["head1"],
+    "body" : ["body3","body4"]},
+    {name: "marketing1", 
+        "preheader" : ["pre2"], 
+        "header" : ["head2"],
+        "body" : ["body1","body2"]},
+    {name: "marketing2", 
+        "preheader" : ["pre2"], 
+        "header" : ["head1"],
+        "body" : ["body2"]},
+]
+
+/* harmony default export */ __webpack_exports__["a"] = (listTemplates);
+
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+const body = [{id:"body1",content:'<div>body1</div>'},{id:"body2",content:'<div>body2</div>'},{id:"body3",content:'<div>body3</div>'},{id:"body4",content:'<div>bodyr4</div>'}]
+
+/* harmony default export */ __webpack_exports__["a"] = (body);
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+const header = [{id:"head1",content:`  <tr>
+<td align="left" style="padding-left:0px;padding-right:0px;padding-top:0px;padding-bottom:0px;background-color:#C41F3E;">
+  <!--[if mso]> <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%"><tr><td width="50%" valign="top"><![endif]-->
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="left" class="force-row" style="width:320px; float:left;">
+    <tr>
+      <td class="col" valign="top" style="width:100%">
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="contents" style="border-spacing:0;font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;width:100%;">
+          <tr>
+            <td valign="middle" class="container-padding pt-3 pb-4" style="padding-bottom:0px; padding-right:20px; padding-left:40px; padding-top:80px; color: #ffffff; font-family: 'Whitney A', 'Whitney B', Arial, sans-serif; font-weight: 400; text-align: left;">
+              <h1 style="margin:0;font-size:22px; line-height:114%; line-height:1.27!important;font-weight: 500;">Économisez jusqu’à 10&nbsp;¢ par litre à la&nbsp;pompe<sup style="line-height:100%;">1,2</sup></h1>
+              <p style="margin: 0px;margin-top: 10px;font-size:18px; line-height: 108%; line-height: 1.16!important; font-weight: 500;">Activez vos économies quand vous faites le&nbsp;plein</p>
+              <p style="Margin:0; Margin-top:20px; text-align:left;"> 
+                <!--[if mso]> <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://www.cibc.com/fr/special-offers/journie-gas-rewards.html?utrc=E1307:2&utm_medium=Email&utm_campaign=Journie-Rewards_Debit-Card-Trigger_F22&" target="_blank" style="height:48px;v-text-anchor:middle;width:200px;" arcsize="10%" stroke="f" fillcolor="#ffffff" xt="SPCLICK"> <w:anchorlock/> <center> <![endif]-->
+<a class="col" href="https://click.infotest.cibc.com/?qs=acb59851733109f8949236e257e386963499b4db194cae3b6c2977f952ef1b77414ea8d16c61361622f0f68d8d5907d528e792e50afbde0a" name="Pour en savoir plus" style="width:200px; display:inline-block; border-radius:4px; background-color:#ffffff; color:#c41f3e; font-family: 'Whitney A', 'Whitney B', Arial, sans-serif; font-size:18px; line-height:230%; line-height:2.6!important; font-weight: 500; text-align:center; text-decoration:none; -webkit-text-size-adjust:none;" target="_blank" xt="SPCLICK">Pour en savoir&nbsp;plus</a> 
+                <!--[if mso]> </center> </v:roundrect> <![endif]--> 
+              </p>
+            </td>  
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <!--[if mso]></td><td width="50%" valign="top"><![endif]-->
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="right" class="force-row" style="width:320px; float:left;">
+    <tr>
+      <td class="col" valign="top" style="width:100%;padding:0;margin:0;background-color: #ffffff;"><div class="mbl-hide"> <img name="Cont_3" src="https://image.info.cibc.com/lib/fe2d11727364047c731d75/m/2/105d7198-4870-41e3-b20e-98a3d0722cb6.jpg" width="320" alt="Femme au volant d'une voiture" style="width:320px;max-width:640px;height:auto;display:block;margin:0px;" border="0"> </div>
+
+        <!--[if !mso 9]><!-->
+
+        <div class="mbl-show inline" style="display:none;"> <img name="Cont_3" src="https://image.info.cibc.com/lib/fe2d11727364047c731d75/m/2/105d7198-4870-41e3-b20e-98a3d0722cb6.jpg" width="320" alt="Femme au volant d'une voiture" style="width:100%;max-width:640px;height:auto;display:block;margin:0px;" border="0"> </div>
+
+        <!--<![endif]--></td>
+    </tr>
+  </table>
+  <!--[if mso]></td></tr></table><![endif]-->
+</td>
+</tr>`},{id:"head2",content:'<div>header2</div>'},{id:"head3",content:'<div>header3</div>'},{id:"head4",content:'<div>header4</div>'}]
+
+/* harmony default export */ __webpack_exports__["a"] = (header);
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+const logo = [{id:"log1", previewSrc: "",content:`<tr>
+<td align="left" class="container-padding content" style="padding-left:40px; padding-right:40px; padding-top:34px; padding-bottom:34px; background-color:#f2f3f2;">
+    <table align="left" border="0" cellpadding="0" cellspacing="0" role="presentation" style="text-align: left;">
+        <tr>
+            <td style="text-align:left;padding-right:16px;" valign="top">
+                <a href="https://click.infotest.cibc.com/?qs=95abf4ec45f4924270c4adf189993fab49bf6c1bea9f3423eb2c14541dc14316b17089ba3e18869efbb8e2266ce019f2562e5c9cb9d250c5" name="CIBC Logo" style="display: inline-block; outline: none; border: none;" target="_blank" xt="SPCLICK">
+                    <img alt="Logo CIBC" height="34" name="Cont_0" src="https://www.sc.pages02.net/lp/39688/483219/images/CIBC_logo.png" style="width:118px;outline:none;border:none;display:inline-block;" width="118"> 
+                </a>
+            </td>
+        </tr>
+    </table>
+</td>
+</tr>`}]
+
+/* harmony default export */ __webpack_exports__["a"] = (logo);
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*

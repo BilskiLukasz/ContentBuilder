@@ -1,7 +1,13 @@
+import preheader from "./modules/preheader"
+import listTemplates from "./modules/listTemplates";
+import body from "./modules/body"
+import header from "./modules/header"
+import logo from "./modules/logo"
+
+
 
 var SDK = require('blocksdk');
 const sdk = new SDK({
-	blockEditorWidth: 600,
 	tabs: [
 		'htmlblock', // This is the HTML Editor Tab
 		'stylingblock' // This is the styling tab
@@ -13,14 +19,23 @@ const { createApp } = Vue
 createApp({
 	data() {
 	  return {
-		listTemplates: [{name: "service", "items" : ["pre3", "head3", "body3"]},{name: "marketing1", "items" : ["pre1", "head1", "body1"]},{name: "marketing2", "items" : ["pre2", "head2", "body2"]}],
-		preheader: [{id:"pre1",title:'<div>preheader1</div>'},{id:"pre2",title:'<div>preheader2</div>'},{id:"pre3",title:'<div>preheader3</div>'},{id:"pre4",title:'<div>preheader4</div>'},],
-		header: [{id:"head1",title:'<div>header1</div>'},{id:"head2",title:'<div>header2</div>'},{id:"head3",title:'<div>header3</div>'},{id:"head4",title:'<div>header4</div>'}],
-		body: [{id:"body1",title:'<div>body1</div>'},{id:"body2",title:'<div>body2</div>'},{id:"body3",title:'<div>body3</div>'},{id:"body4",title:'<div>bodyr4</div>'}],
-		listItems: [{id:10,title:'<div>item10</div>'},{id:11,title:"<div>item11</div>"},{id:12,title:"<div>item12</div>"},{id:13,title:"<div>item13</div>"},{id:14,title:"<div>item14</div>"},{id:15,title:"<div>item15</div>"},{id:16,title:"<div>item16</div>"}],
+		listTemplates: [],
+		preheader: [],
+    	logo: [],
+		header: [],
+		body: [],
+		listItems: [],
 		listSelected: []
 	  }
 	},
+  mounted() {
+	this.logo = logo.slice(0)
+	this.preheader = preheader.slice(0)
+	this.header = header.slice(0)
+	this.body = body.slice(0)
+	this.listTemplates = listTemplates.slice(0)
+    this.fillBlockList("preheader")
+  },
 	methods: {
 
 		fillBlockList(snippet) {
@@ -29,18 +44,39 @@ createApp({
 		},
 
 		fillTemplateList(input) {
-			const template = document.querySelector(`#${input}`).value
-			this.listTemplates.filter((el) => {if(el.name == template) this.$data["preheader"].map()})
+
+      this.listSelected.length = 0;
+      
+      const template = this.listTemplates.filter(el => {if (el.name == document.querySelector(`#${input}`).value) return el})
+
+      const tempObj = JSON.parse(JSON.stringify(template))[0];
+
+      for (const key in tempObj) {
+        if ( key != "name") {
+          this.$data[key].map(el => {
+            tempObj[key].forEach(element => {
+              if (element == el.id) {
+                this.listSelected.push(el)
+              }
+            })
+          })
+        }
+      }
+
+      this.setBuilderContent()
 		},
+
+
+		
   
 	  setBuilderContent() {
   
   
 		  var outputString = "";
   
-		  this.listSelected.forEach(el => outputString += el.title)
+		  this.listSelected.forEach(el => outputString += el.content)
   
-		  sdk.setData({"items" : this.listSelected.map((el) => {return {"id": el.id, "text": el.title}})})
+		  sdk.setData({"items" : this.listSelected.map((el) => {return {"id": el.id, "text": el.content}})})
 		  sdk.setContent(outputString)
   
 	  },

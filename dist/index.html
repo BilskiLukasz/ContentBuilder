@@ -1,4 +1,4 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -94,6 +94,7 @@
 					<legend>Choose Content Blocks</legend>
 					<select name="" id="" @change="fillBlockList($event.target.value)">						
 						<option value="Preheader" selected>Preheader</option>
+						<option value="Logo">Logo</option>
 						<option value="Header">Header</option>						
 						<option value="Body">Body</option>
 						<option value="Rating/Social/Legal">Rating/Social/Legal</option>
@@ -113,14 +114,14 @@
 
 			<div class="elements preview">
 				<div v-for="item in listItems" :key="item.id" >
-					<p class="items" draggable="true" :itemid="item.id" @dragstart="startDrag($event)">{{item.id}} || {{item.title}}</p>
+					<p class="items" draggable="true" :itemid="item.id" @dragstart="startDrag($event)">{{item.id}} || {{item.content}}</p>
 				</div>
 			</div>
 			<div class="ready preview">
 
 				<div class="drop-zone" @drop="onDrop($event, index)" @dragenter="dragHover($event)" @dragleave="dragHover($event)" @dragover.prevent><span v-if="listSelected.length === 0"><br>Put your block here<br>&nbsp;</span></div>
 				<div v-for="(item, index) in listSelected" :key="index">
-					<p class="items" @dragstart="startDrag($event, index)" draggable="true">{{item.id}} || {{item.title}}<span @click="remove(index)" class="remove">X</span></p>
+					<p class="items" @dragstart="startDrag($event, index)" draggable="true">{{item.id}} || {{item.content}}<span @click="remove(index)" class="remove">X</span></p>
 					<div class="drop-zone" @drop="onDrop($event, index)" @dragenter="dragHover($event)" @dragleave="dragHover($event)" @dragover.prevent></div>
 				</div>				
 			</div>
@@ -128,5 +129,3 @@
 		<script src="./main.js"></script>
 	</body>
 </html>
-
-<!DOCTYPE html>
