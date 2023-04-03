@@ -11,7 +11,7 @@ const sdk = new SDK({
 	tabs: [
 		'htmlblock', // This is the HTML Editor Tab
 		'stylingblock' // This is the styling tab
-	]});
+	]},null,true);
 
 const { createApp } = Vue
 
@@ -32,7 +32,7 @@ createApp({
 	this.logo = logo.slice(0)
 	this.preheader = preheader.slice(0)
 	this.header = header.slice(0)
-	this.body = body.slice(0)
+	this.body = body.slice(0)	
 	this.listTemplates = listTemplates.slice(0)
     this.fillBlockList("preheader")
   },

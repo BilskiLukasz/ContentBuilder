@@ -87,7 +87,7 @@ const sdk = new SDK({
 	tabs: [
 		'htmlblock', // This is the HTML Editor Tab
 		'stylingblock' // This is the styling tab
-	]});
+	]},null,true);
 
 const { createApp } = Vue
 
@@ -108,9 +108,16 @@ createApp({
 	this.logo = __WEBPACK_IMPORTED_MODULE_4__modules_logo__["a" /* default */].slice(0)
 	this.preheader = __WEBPACK_IMPORTED_MODULE_0__modules_preheader__["a" /* default */].slice(0)
 	this.header = __WEBPACK_IMPORTED_MODULE_3__modules_header__["a" /* default */].slice(0)
-	this.body = __WEBPACK_IMPORTED_MODULE_2__modules_body__["a" /* default */].slice(0)
+	this.body = __WEBPACK_IMPORTED_MODULE_2__modules_body__["a" /* default */].slice(0)	
 	this.listTemplates = __WEBPACK_IMPORTED_MODULE_1__modules_listTemplates__["a" /* default */].slice(0)
     this.fillBlockList("preheader")
+
+	sdk.getData((data) => {
+		
+		if(data.items != undefined) {
+			this.listSelected = data.items.slice(0)
+		}
+	})
   },
 	methods: {
 
@@ -152,7 +159,7 @@ createApp({
   
 		  this.listSelected.forEach(el => outputString += el.content)
   
-		  sdk.setData({"items" : this.listSelected.map((el) => {return {"id": el.id, "text": el.content}})})
+		  sdk.setData({"items" : this.listSelected.map((el) => {return {"id": el.id, "content": el.content}})})
 		  sdk.setContent(outputString)
   
 	  },

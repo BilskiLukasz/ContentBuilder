@@ -8,12 +8,18 @@
 		<style>
 
 			body {
-				background-color: rgb(215, 213, 213);
+				background-color: rgb(255,255,255);
 			}
 
 			#app {
 				margin: 0 auto;
 			}
+
+			.wrapper {
+				max-width: 860px;
+				margin: 0 auto;
+			}
+
 			.preview {
 				width:50%;
 				text-align: center;
@@ -30,6 +36,7 @@
 				width: 80%;
 				border-radius: 5px;
 				background-color: white;
+				box-shadow: 2px 2px rgba(255,255,255,0.6);
 				margin: 0 auto;
 				padding: 20px 0;
 			}
@@ -43,27 +50,51 @@
 			}
 
 			.menu {
-				display: grid;
-				grid-template-columns: 1fr 1fr;
+				display: flex;
 			}
 
 			.menu-item {
-				display: grid;
-				
+				display: flex;
+				flex-wrap: wrap;
+			}
+
+			.menu-item legend {
+				text-align: center;
+			}
+
+			.menu-left, .menu-right {
+				display: flex;
+				flex-wrap: wrap;
+				flex: 1;				
+			}
+
+			fieldset {
+				width: 100%;
+				display: flex;
+				justify-content: center;
 			}
 
 			select {
 				border-radius: 5px;
+				padding: 5px 10px;
+				margin: 5px 10px 5px 10px;
+				height: 30px;
+				display: flex;
+				align-self: center;
+				outline: none;
 			}
 
 			.btn {
+				display: flex;
+				align-self: center;
+				align-items: center;
+				height: 30px;
 				border: none;
 				background-color: #00A1E0;
-				padding: 8px 26px;
+				padding: 0px 26px;
 				border-radius: 5px;
 				color: white;
 				cursor: pointer;
-				margin: 5px auto;
 			}
 
 			.drop-zone {
@@ -84,43 +115,50 @@
 	<body>
 		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
-		<div id="app">	
-			<div class="menu">				
-				<fieldset class="menu-item">
-					<legend>Choose Content Blocks</legend>
-					<select name="" id="" @change="fillBlockList($event.target.value)">						
-						<option value="Preheader" selected>Preheader</option>
-						<option value="Logo">Logo</option>
-						<option value="Header">Header</option>						
-						<option value="Body">Body</option>
-						<option value="Rating/Social/Legal">Rating/Social/Legal</option>
-					</select>
-				</fieldset>
-				<fieldset class="menu-item">
-					<legend>Choose Template</legend>
-					<select name="" id="template">
-						<option value="custom" selected>Custom</option>
-						<option value="service">Service Email</option>						
-						<option value="marketing1">Marketing Header Img</option>
-						<option value="marketing2">Marketing no Img</option>
-					</select>
-					<button class="btn" @click="fillTemplateList('template')">Submit</button>	
-				</fieldset>
-			</div>
-
-			<div class="elements preview">
-				<div v-for="item in listItems" :key="item.id" >
-					<p class="items" draggable="true" :itemid="item.id" @dragstart="startDrag($event)">{{item.id}} || {{item.content}}</p>
+		<div id="app">
+			<div class="wrapper">
+				<div class="menu">
+					<div class="menu-left">
+						<fieldset class="menu-item">
+							<legend>Choose Content Blocks</legend>
+							<select name="" id="" @change="fillBlockList($event.target.value)">						
+								<option value="Preheader" selected>Preheader</option>
+								<option value="Logo">Logo</option>
+								<option value="Header">Header</option>						
+								<option value="Body">Body</option>
+								<option value="Rating/Social/Legal">Rating/Social/Legal</option>
+							</select>
+						</fieldset>
+					</div>
+					<div class="menu-right">
+						<fieldset class="menu-item">
+							<legend>Choose Template</legend>
+							<select name="" id="template">
+								<option value="custom" selected>Custom</option>
+								<option value="service">Service Email</option>						
+								<option value="marketing1">Marketing Header Img</option>
+								<option value="marketing2">Marketing no Img</option>
+							</select>
+							<button class="btn" @click="fillTemplateList('template')">Submit</button>	
+						</fieldset>
+					</div>
+				</div>
+	
+				<div class="elements preview">
+					<div v-for="item in listItems" :key="item.id" >
+						<p class="items" draggable="true" :itemid="item.id" @dragstart="startDrag($event)">{{item.id}} || {{item.content}}</p>
+					</div>
+				</div>
+				<div class="ready preview">
+	
+					<div class="drop-zone" @drop="onDrop($event, index)" @dragenter="dragHover($event)" @dragleave="dragHover($event)" @dragover.prevent><span v-if="listSelected.length === 0"><br>Put your block here<br>&nbsp;</span></div>
+					<div v-for="(item, index) in listSelected" :key="index">
+						<p class="items" @dragstart="startDrag($event, index)" draggable="true">{{item.id}} || {{item.content}}<span @click="remove(index)" class="remove">X</span></p>
+						<div class="drop-zone" @drop="onDrop($event, index)" @dragenter="dragHover($event)" @dragleave="dragHover($event)" @dragover.prevent></div>
+					</div>				
 				</div>
 			</div>
-			<div class="ready preview">
 
-				<div class="drop-zone" @drop="onDrop($event, index)" @dragenter="dragHover($event)" @dragleave="dragHover($event)" @dragover.prevent><span v-if="listSelected.length === 0"><br>Put your block here<br>&nbsp;</span></div>
-				<div v-for="(item, index) in listSelected" :key="index">
-					<p class="items" @dragstart="startDrag($event, index)" draggable="true">{{item.id}} || {{item.content}}<span @click="remove(index)" class="remove">X</span></p>
-					<div class="drop-zone" @drop="onDrop($event, index)" @dragenter="dragHover($event)" @dragleave="dragHover($event)" @dragover.prevent></div>
-				</div>				
-			</div>
 		</div>
 		<script src="./main.js"></script>
 	</body>
