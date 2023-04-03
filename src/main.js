@@ -8,11 +8,10 @@ import logo from "./modules/logo"
 
 var SDK = require('blocksdk');
 const sdk = new SDK({
-	blockEditorWidth: 600,
+	blockEditorWidth: 520,
 	tabs: [
-		'htmlblock', // This is the HTML Editor Tab
-		'stylingblock' // This is the styling tab
-	]},null,true);
+		'htmlblock',
+	]});
 
 const { createApp } = Vue
 
