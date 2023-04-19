@@ -84,9 +84,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 var SDK = __webpack_require__(6);
 const sdk = new SDK({
+	blockEditorWidth: 520,
 	tabs: [
-		'htmlblock', // This is the HTML Editor Tab
-		'stylingblock' // This is the styling tab
+		'htmlblock',
 	]},null,true);
 
 const { createApp } = Vue
@@ -110,112 +110,116 @@ createApp({
 	this.header = __WEBPACK_IMPORTED_MODULE_3__modules_header__["a" /* default */].slice(0)
 	this.body = __WEBPACK_IMPORTED_MODULE_2__modules_body__["a" /* default */].slice(0)	
 	this.listTemplates = __WEBPACK_IMPORTED_MODULE_1__modules_listTemplates__["a" /* default */].slice(0)
-    this.fillBlockList("preheader")
+
+	this.fillBlockList("preheader")
 
 	sdk.getData((data) => {
-		
+
 		if(data.items != undefined) {
 			this.listSelected = data.items.slice(0)
-		}
+		} 
+
 	})
   },
-	methods: {
+  methods: {
 
-		fillBlockList(snippet) {
-			const arrayToSwap = this.$data[`${snippet.toLowerCase()}`]
-			this.listItems = arrayToSwap.slice(0)
-		},
-
-		fillTemplateList(input) {
-
-      this.listSelected.length = 0;
-      
-      const template = this.listTemplates.filter(el => {if (el.name == document.querySelector(`#${input}`).value) return el})
-
-      const tempObj = JSON.parse(JSON.stringify(template))[0];
-
-      for (const key in tempObj) {
-        if ( key != "name") {
-          this.$data[key].map(el => {
-            tempObj[key].forEach(element => {
-              if (element == el.id) {
-                this.listSelected.push(el)
-              }
-            })
-          })
-        }
-      }
-
-      this.setBuilderContent()
-		},
-
-
-		
-  
-	  setBuilderContent() {
-  
-  
-		  var outputString = "";
-  
-		  this.listSelected.forEach(el => outputString += el.content)
-  
-		  sdk.setData({"items" : this.listSelected.map((el) => {return {"id": el.id, "content": el.content}})})
-		  sdk.setContent(outputString)
-  
-	  },
-  
-	  startDrag(event, indexItem) {
-		  event.dataTransfer.dropEffect = "move"
-  
-		  if(event.target.hasAttribute("itemid")) {
-			  event.dataTransfer.setData("newItem", true)
-			  event.dataTransfer.setData("itemID", event.target.getAttribute("itemid"))
-		  } else {
-			  event.dataTransfer.setData("newItem", false)
-			  event.dataTransfer.setData("itemID", indexItem)
-		  }
-	  },
-
-	  dragHover(event) {
-		event.preventDefault()
-		event.target.classList.toggle("drop-zone-hover")
-	  },
-  
-	  onDrop(event, toIndex) {
-		event.target.classList.toggle("drop-zone-hover")
-		  
-		  if(event.dataTransfer.getData("newItem") == "true") {
-  
-			  const handledItem = this.listItems.filter((item) => item.id == event.dataTransfer.getData("itemID"))
-  
-			  this.listSelected.splice(toIndex+1, 0, handledItem[0])
-  
-		  } else {
-  
-			  const itemIndex = event.dataTransfer.getData("itemID")
-  
-			  if(itemIndex == toIndex) { return }
-	  
-			  if(itemIndex > toIndex ) {toIndex++}
-	  
-			  this.listSelected.splice(toIndex, 0, this.listSelected.splice(itemIndex, 1)[0])
-		  }
-  
-		  this.setBuilderContent()
-  
-	  },
-  
-	  startDragUpdate(event, index) {
-		  event.dataTransfer.dropEffect = "move"
-		  event.dataTransfer.setData("itemID", index)
-	  },
-  
-	  remove (index) {
-		  this.listSelected.splice(index,1)
-		this.setBuilderContent()
-	  }
+	fillBlockList(snippet) {
+		const arrayToSwap = this.$data[`${snippet.toLowerCase()}`]
+		this.listItems = arrayToSwap.slice(0)
 	},
-  }).mount('#app')
+
+	fillTemplateList(input) {
+
+		this.listSelected.length = 0;
+		
+		const template = this.listTemplates.filter(el => {if (el.name == document.querySelector(`#${input}`).value) return el})
+
+		const tempObj = JSON.parse(JSON.stringify(template))[0];
+
+		for (const key in tempObj) {
+			if ( key != "name") {
+			this.$data[key].map(el => {
+				tempObj[key].forEach(element => {
+				if (element == el.id) {
+					this.listSelected.push(el)
+				}
+				})
+			})
+			}
+		}
+
+		this.setBuilderContent()
+	},
+
+
+	
+
+  setBuilderContent() {
+
+
+	  var outputString = "";
+
+	  this.listSelected.forEach(el => outputString += el.content)
+
+	  sdk.setData({"items" : this.listSelected.map((el) => {return {"id": el.id, "content": el.content}})})
+	  sdk.setContent(outputString)
+
+  },
+
+  startDrag(event, indexItem) {
+	  event.dataTransfer.dropEffect = "move"
+
+	  if(event.target.hasAttribute("itemid")) {
+		  event.dataTransfer.setData("newItem", true)
+		  event.dataTransfer.setData("itemID", event.target.getAttribute("itemid"))
+	  } else {
+		  event.dataTransfer.setData("newItem", false)
+		  event.dataTransfer.setData("itemID", indexItem)
+	  }
+  },
+
+  dragHover(event) {
+	event.preventDefault()
+	event.target.classList.toggle("drop-zone-hover")
+  },
+
+  onDrop(event, toIndex) {
+	event.target.classList.toggle("drop-zone-hover")
+	  
+	  if(event.dataTransfer.getData("newItem") == "true") {
+
+		console.log("hehe")
+
+		  const handledItem = this.listItems.filter((item) => item.id == event.dataTransfer.getData("itemID"))
+
+		  this.listSelected.splice(toIndex+1, 0, handledItem[0])
+
+	  } else {
+
+		  const itemIndex = event.dataTransfer.getData("itemID")
+
+		  if(itemIndex == toIndex) { return }
+  
+		  if(itemIndex > toIndex ) {toIndex++}
+  
+		  this.listSelected.splice(toIndex, 0, this.listSelected.splice(itemIndex, 1)[0])
+	  }
+
+	  this.setBuilderContent()
+
+  },
+
+  startDragUpdate(event, index) {
+	  event.dataTransfer.dropEffect = "move"
+	  event.dataTransfer.setData("itemID", index)
+  },
+
+  remove (index) {
+	  this.listSelected.splice(index,1)
+	this.setBuilderContent()
+  }
+},
+}).mount('#app')
 
 /***/ }),
 /* 1 */
@@ -223,10 +227,143 @@ createApp({
 
 "use strict";
 const preheader = [
-    {id:"pre1",content:'<div>preheader1</div>'},
-    {id:"pre2",content:'<div>preheader2</div>'},
-    {id:"pre3",content:'<div>preheader3</div>'},
-    {id:"pre4",content:'<div>preheader4</div>'},
+    {
+        id:"pre1",
+        thumbnail: './imgs/Preheader.png',
+        content:`<tr>
+        <td class="px-2" align="left" style="padding-left:40px;padding-right:40px;padding-top:10px;padding-bottom:10px; background-color: #ffffff;">
+            <!--[if mso]>             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">             <tr><td width="70%" valign="top"><![endif]-->
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="left" class="force-row mobile-height" style="float:left;width:430px;">
+                <tr>
+                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:left;font-size:11px;line-height:120%;line-height:1.4!important;">
+                      Preheader copy
+                    </td>
+                </tr>
+            </table>
+            <!--[if mso]></td><td width="30%" valign="top"><![endif]-->
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="right" class="force-row mobile-height" style="float:left;width:130px;">
+                <tr>
+                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:right;font-size:11px;line-height:120%;line-height:1.4!important;">
+                      <a href="%%view_email_url%%" target="_blank" style="color:#606366;text-decoration:underline;" name="Read Online">Read&nbsp;online</a>
+                    </td>
+                </tr>
+            </table> 
+        <!--[if mso]></td></tr></table><![endif]-->
+        </td>
+      </tr>`
+    },
+    {
+        id:"pre2",
+        thumbnail: './imgs/Preheader_FR.png',
+        content:`  <tr>
+        <td class="px-2" align="left" style="padding-left:40px;padding-right:40px;padding-top:10px;padding-bottom:10px; background-color: #ffffff;">
+            <!--[if mso]>           <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">           <tr><td width="70%" valign="top"><![endif]-->
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="left" class="force-row mobile-height" style="float:left;width:430px;">
+                <tr>
+                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:left;font-size:11px;line-height:120%;line-height:1.4!important;">
+                      Preheader copy
+                    </td> 
+                </tr>
+            </table>
+            <!--[if mso]></td><td width="30%" valign="top"><![endif]-->
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="right" class="force-row mobile-height" style="float:left;width:130px;">
+                <tr>
+                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:right;font-size:11px;line-height:120%;line-height:1.4!important;">
+                      <a href="%%view_email_url%%" target="_blank" style="color:#606366;text-decoration:underline;" name="Read Online">Lisez la version <span style="white-space:nowrap;">en&nbsp;ligne</span></a>
+                    </td>
+                </tr>
+            </table> 
+        <!--[if mso]></td></tr></table><![endif]-->
+        </td>
+      </tr> `
+    },
+    {
+        id:"pre3",
+        thumbnail: './imgs/Preheader_NoText.png',
+        content:`  <tr>
+        <td class="px-2" align="left" style="padding-left:40px;padding-right:40px;padding-top:10px;padding-bottom:10px; background-color: #ffffff;">
+            <!--[if mso]>           <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">           <tr><td width="70%" valign="top"><![endif]-->
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="left" class="force-row mobile-height" style="float:left;width:430px;">
+                <tr>
+                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:left;font-size:11px;line-height:120%;line-height:1.4!important;">
+                      Preheader copy
+                    </td> 
+                </tr>
+            </table>
+            <!--[if mso]></td><td width="30%" valign="top"><![endif]-->
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="right" class="force-row mobile-height" style="float:left;width:130px;">
+                <tr>
+                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:right;font-size:11px;line-height:120%;line-height:1.4!important;">
+                      <a href="%%view_email_url%%" target="_blank" style="color:#606366;text-decoration:underline;" name="Read Online">Lisez la version <span style="white-space:nowrap;">en&nbsp;ligne</span></a>
+                    </td>
+                </tr>
+            </table> 
+        <!--[if mso]></td></tr></table><![endif]-->
+        </td>
+      </tr> `
+    },
+    {
+        id:"pre4",
+        thumbnail: './imgs/Preheader_FR.png',
+        content:`  <tr>
+        <td class="px-2" align="left" style="padding-left:40px;padding-right:40px;padding-top:10px;padding-bottom:10px; background-color: #ffffff;">
+            <!--[if mso]>           <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">           <tr><td width="70%" valign="top"><![endif]-->
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="left" class="force-row mobile-height" style="float:left;width:430px;">
+                <tr>
+                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:left;font-size:11px;line-height:120%;line-height:1.4!important;">
+                      Preheader copy
+                    </td> 
+                </tr>
+            </table>
+            <!--[if mso]></td><td width="30%" valign="top"><![endif]-->
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="right" class="force-row mobile-height" style="float:left;width:130px;">
+                <tr>
+                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:right;font-size:11px;line-height:120%;line-height:1.4!important;">
+                      <a href="%%view_email_url%%" target="_blank" style="color:#606366;text-decoration:underline;" name="Read Online">Lisez la version <span style="white-space:nowrap;">en&nbsp;ligne</span></a>
+                    </td>
+                </tr>
+            </table> 
+        <!--[if mso]></td></tr></table><![endif]-->
+        </td>
+      </tr> `
+    },
+    {
+        id:"pre5",
+        thumbnail: './imgs/Preheader_points.png',
+        content:`  <tr>
+        <td class="px-2" align="left" style="padding-left:40px;padding-right:40px;padding-top:10px;padding-bottom:10px; background-color: #ffffff;border-bottom:1px solid #AFAFAF;">
+            <!--[if mso]>             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">             <tr><td width="70%" valign="top"><![endif]-->
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="left" class="force-row mobile-height" style="float:left;width:430px;">
+                <tr>
+                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:left;font-size:11px;line-height:120%;line-height:1.4!important;">
+                      PREHEADER TEXT
+                    </td> 
+                </tr>
+            </table>
+            <!--[if mso]></td><td width="30%" valign="top"><![endif]-->
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="right" class="force-row mobile-height" style="float:left;width:130px;">
+                <tr>
+                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:right;font-size:11px;line-height:120%;line-height:1.4!important;">
+                      <a href="%%view_email_url%%" target="_blank" style="color:#606366;text-decoration:underline;" name="Read Online">Read&nbsp;online</a>
+                    </td>
+                </tr>
+            </table> 
+        <!--[if mso]></td></tr></table><![endif]-->
+        </td>
+      </tr>                       
+      <tr>
+        <td>
+          <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="width:100%">
+            <tr>
+              <td class="mbl-right px-2" style="padding:10px 40px; font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#C41F3E; font-size:14px; line-height:125%; line-height:1.5!important; text-align: right;">
+                Sample text here<br>
+                <a style="color:#C41F3E;text-decoration:none;cursor:text">Date here</a>*: <strong style="font-weight:600;">$</strong>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr> `
+    }
 ]
 
 /* harmony default export */ __webpack_exports__["a"] = (preheader);

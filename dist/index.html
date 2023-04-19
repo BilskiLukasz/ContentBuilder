@@ -8,7 +8,8 @@
 		<style>
 
 			body {
-				background-color: rgb(255,255,255);
+				background-color: #e0edf5;
+				font-size:14px;
 			}
 
 			#app {
@@ -33,24 +34,16 @@
 			}
 
 			.items {
-				width: 80%;
+				position: relative;
+				width: 90%;
 				border-radius: 5px;
-				background-color: white;
-				box-shadow: 2px 2px rgba(255,255,255,0.6);
+				box-shadow: 2px 2px 4px rgba(0,0,0,0.6);
 				margin: 0 auto;
-				padding: 20px 0;
-			}
-
-			.remove {
-				padding: 4px;
-				margin-left: 10px;
-				cursor: pointer;
-				background-color: black;
-				color: white;
 			}
 
 			.menu {
 				display: flex;
+				padding-bottom: 20px;
 			}
 
 			.menu-item {
@@ -110,6 +103,27 @@
 				min-height: 20px;
 			}
 
+			.items-wrapper {
+				position: relative;
+			}
+
+			.remove {
+				position: absolute;
+				top:50%;
+				right: 5px;
+				transform: translateY(-50%);
+				padding: 4px;
+				cursor: pointer;
+				background-color: black;
+				color: white;
+			}
+
+			@media (max-width:450px) {
+				select {
+				margin: 5px 0px;
+			}
+			}
+
 		</style>
 	</head>
 	<body>
@@ -146,14 +160,17 @@
 	
 				<div class="elements preview">
 					<div v-for="item in listItems" :key="item.id" >
-						<p class="items" draggable="true" :itemid="item.id" @dragstart="startDrag($event)">{{item.id}} || {{item.content}}</p>
+						<img v-bind:src="item.thumbnail" class="items" draggable="true" :itemid="item.id" @dragstart="startDrag($event)"/>
 					</div>
 				</div>
 				<div class="ready preview">
 	
 					<div class="drop-zone" @drop="onDrop($event, index)" @dragenter="dragHover($event)" @dragleave="dragHover($event)" @dragover.prevent><span v-if="listSelected.length === 0"><br>Put your block here<br>&nbsp;</span></div>
 					<div v-for="(item, index) in listSelected" :key="index">
-						<p class="items" @dragstart="startDrag($event, index)" draggable="true">{{item.id}} || {{item.content}}<span @click="remove(index)" class="remove">X</span></p>
+						<div class="items-wrapper">
+							<img v-bind:src="item.thumbnail" class="items" draggable="true" @dragstart="startDrag($event, index)"/>
+							<span @click="remove(index)" class="remove">X</span>
+						</div>
 						<div class="drop-zone" @drop="onDrop($event, index)" @dragenter="dragHover($event)" @dragleave="dragHover($event)" @dragover.prevent></div>
 					</div>				
 				</div>
