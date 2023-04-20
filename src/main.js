@@ -85,7 +85,7 @@ createApp({
 
 	  this.listSelected.forEach(el => outputString += el.content)
 
-	  sdk.setData({"items" : this.listSelected.map((el) => {return {"id": el.id, "content": el.content}})})
+	  sdk.setData({"items" : this.listSelected.map((el) => {return {"id": el.id,"thumbnail": el.thumbnail, "content": el.content}})})
 	  sdk.setContent(outputString)
 
   },

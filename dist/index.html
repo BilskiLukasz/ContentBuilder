@@ -10,6 +10,7 @@
 			body {
 				background-color: #e0edf5;
 				font-size:14px;
+				overflow-y: hidden;
 			}
 
 			#app {
@@ -27,6 +28,22 @@
 				min-height:10px;
 				display: inline-block;
 				vertical-align: top;
+				position: absolute;
+				overflow-y: auto;
+				height: 100%;
+			}
+
+			.previewWrapper {
+				position: relative;
+				height: max-content;
+			}
+
+			.elements {
+				left: 0;
+			}
+
+			.ready {
+				right: 0;
 			}
 
 			.preview .items {
@@ -157,23 +174,21 @@
 						</fieldset>
 					</div>
 				</div>
-	
-				<div class="elements preview">
-					<div v-for="item in listItems" :key="item.id" >
-						<img v-bind:src="item.thumbnail" class="items" draggable="true" :itemid="item.id" @dragstart="startDrag($event)"/>
-					</div>
-				</div>
-				<div class="ready preview">
-	
-					<div class="drop-zone" @drop="onDrop($event, index)" @dragenter="dragHover($event)" @dragleave="dragHover($event)" @dragover.prevent><span v-if="listSelected.length === 0"><br>Put your block here<br>&nbsp;</span></div>
-					<div v-for="(item, index) in listSelected" :key="index">
-						<div class="items-wrapper">
-							<img v-bind:src="item.thumbnail" class="items" draggable="true" @dragstart="startDrag($event, index)"/>
-							<span @click="remove(index)" class="remove">X</span>
+					<div class="elements preview">
+						<div v-for="item in listItems" :key="item.id" >
+							<img v-bind:src="item.thumbnail" class="items" draggable="true" :itemid="item.id" @dragstart="startDrag($event)"/>
 						</div>
-						<div class="drop-zone" @drop="onDrop($event, index)" @dragenter="dragHover($event)" @dragleave="dragHover($event)" @dragover.prevent></div>
-					</div>				
-				</div>
+					</div>
+					<div class="ready preview">		
+						<div class="drop-zone" @drop="onDrop($event, index)" @dragenter="dragHover($event)" @dragleave="dragHover($event)" @dragover.prevent><span v-if="listSelected.length === 0"><br>Put your block here<br>&nbsp;</span></div>
+						<div v-for="(item, index) in listSelected" :key="index">
+							<div class="items-wrapper">
+								<img v-bind:src="item.thumbnail" class="items" draggable="true" @dragstart="startDrag($event, index)"/>
+								<span @click="remove(index)" class="remove">X</span>
+							</div>
+							<div class="drop-zone" @drop="onDrop($event, index)" @dragenter="dragHover($event)" @dragleave="dragHover($event)" @dragover.prevent></div>
+						</div>				
+					</div>
 			</div>
 
 		</div>

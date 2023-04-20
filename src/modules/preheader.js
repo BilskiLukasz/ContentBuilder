@@ -7,7 +7,7 @@ const preheader = [
             <!--[if mso]>             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">             <tr><td width="70%" valign="top"><![endif]-->
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="left" class="force-row mobile-height" style="float:left;width:430px;">
                 <tr>
-                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:left;font-size:11px;line-height:120%;line-height:1.4!important;">
+                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:left;font-size:12px;line-height:120%;line-height:1.4!important;">
                       Preheader copy
                     </td>
                 </tr>
@@ -15,7 +15,7 @@ const preheader = [
             <!--[if mso]></td><td width="30%" valign="top"><![endif]-->
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="right" class="force-row mobile-height" style="float:left;width:130px;">
                 <tr>
-                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:right;font-size:11px;line-height:120%;line-height:1.4!important;">
+                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:right;font-size:12px;line-height:120%;line-height:1.4!important;">
                       <a href="%%view_email_url%%" target="_blank" style="color:#606366;text-decoration:underline;" name="Read Online">Read&nbsp;online</a>
                     </td>
                 </tr>
@@ -32,7 +32,7 @@ const preheader = [
             <!--[if mso]>           <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">           <tr><td width="70%" valign="top"><![endif]-->
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="left" class="force-row mobile-height" style="float:left;width:430px;">
                 <tr>
-                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:left;font-size:11px;line-height:120%;line-height:1.4!important;">
+                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:left;font-size:12px;line-height:120%;line-height:1.4!important;">
                       Preheader copy
                     </td> 
                 </tr>
@@ -40,7 +40,7 @@ const preheader = [
             <!--[if mso]></td><td width="30%" valign="top"><![endif]-->
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="right" class="force-row mobile-height" style="float:left;width:130px;">
                 <tr>
-                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:right;font-size:11px;line-height:120%;line-height:1.4!important;">
+                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:right;font-size:12px;line-height:120%;line-height:1.4!important;">
                       <a href="%%view_email_url%%" target="_blank" style="color:#606366;text-decoration:underline;" name="Read Online">Lisez la version <span style="white-space:nowrap;">en&nbsp;ligne</span></a>
                     </td>
                 </tr>
@@ -57,7 +57,7 @@ const preheader = [
             <!--[if mso]>           <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">           <tr><td width="70%" valign="top"><![endif]-->
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="left" class="force-row mobile-height" style="float:left;width:430px;">
                 <tr>
-                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:left;font-size:11px;line-height:120%;line-height:1.4!important;">
+                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:left;font-size:12px;line-height:120%;line-height:1.4!important;">
                       Preheader copy
                     </td> 
                 </tr>
@@ -65,7 +65,7 @@ const preheader = [
             <!--[if mso]></td><td width="30%" valign="top"><![endif]-->
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="right" class="force-row mobile-height" style="float:left;width:130px;">
                 <tr>
-                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:right;font-size:11px;line-height:120%;line-height:1.4!important;">
+                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:right;font-size:12px;line-height:120%;line-height:1.4!important;">
                       <a href="%%view_email_url%%" target="_blank" style="color:#606366;text-decoration:underline;" name="Read Online">Lisez la version <span style="white-space:nowrap;">en&nbsp;ligne</span></a>
                     </td>
                 </tr>
@@ -82,7 +82,7 @@ const preheader = [
             <!--[if mso]>           <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">           <tr><td width="70%" valign="top"><![endif]-->
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="left" class="force-row mobile-height" style="float:left;width:430px;">
                 <tr>
-                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:left;font-size:11px;line-height:120%;line-height:1.4!important;">
+                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:left;font-size:12px;line-height:120%;line-height:1.4!important;">
                       Preheader copy
                     </td> 
                 </tr>
@@ -90,7 +90,7 @@ const preheader = [
             <!--[if mso]></td><td width="30%" valign="top"><![endif]-->
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="right" class="force-row mobile-height" style="float:left;width:130px;">
                 <tr>
-                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:right;font-size:11px;line-height:120%;line-height:1.4!important;">
+                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:right;font-size:12px;line-height:120%;line-height:1.4!important;">
                       <a href="%%view_email_url%%" target="_blank" style="color:#606366;text-decoration:underline;" name="Read Online">Lisez la version <span style="white-space:nowrap;">en&nbsp;ligne</span></a>
                     </td>
                 </tr>
@@ -107,7 +107,7 @@ const preheader = [
             <!--[if mso]>             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">             <tr><td width="70%" valign="top"><![endif]-->
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="left" class="force-row mobile-height" style="float:left;width:430px;">
                 <tr>
-                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:left;font-size:11px;line-height:120%;line-height:1.4!important;">
+                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:left;font-size:12px;line-height:120%;line-height:1.4!important;">
                       PREHEADER TEXT
                     </td> 
                 </tr>
@@ -115,7 +115,7 @@ const preheader = [
             <!--[if mso]></td><td width="30%" valign="top"><![endif]-->
             <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="right" class="force-row mobile-height" style="float:left;width:130px;">
                 <tr>
-                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:right;font-size:11px;line-height:120%;line-height:1.4!important;">
+                    <td class="mbl-center" style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;color:#606366;text-align:right;font-size:12px;line-height:120%;line-height:1.4!important;">
                       <a href="%%view_email_url%%" target="_blank" style="color:#606366;text-decoration:underline;" name="Read Online">Read&nbsp;online</a>
                     </td>
                 </tr>
