@@ -81,12 +81,14 @@ createApp({
   setBuilderContent() {
 
 
+		const openTable = `<table role="presentation" align="left" border="0" cellpadding="0" cellspacing="0" width="100%" class="force-row" style="width:640px;">`
+		const closeTable = '</table>'
 	  var outputString = "";
 
 	  this.listSelected.forEach(el => outputString += el.content)
 
 	  sdk.setData({"items" : this.listSelected.map((el) => {return {"id": el.id,"thumbnail": el.thumbnail, "content": el.content}})})
-	  sdk.setContent(outputString)
+	  sdk.setContent(openTable + outputString + closeTable)
 
   },
 
