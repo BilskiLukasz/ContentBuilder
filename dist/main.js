@@ -378,18 +378,32 @@ const preheader = [
 
 "use strict";
 const listTemplates = [
-    {name: "service", 
+    {name: "fa_afa", 
     "preheader" : ["pre3"], 
     "header" : ["head1"],
     "body" : ["body3","body4"]},
-    {name: "marketing1", 
+    {name: "service", 
         "preheader" : ["pre2"], 
         "header" : ["head2"],
         "body" : ["body1","body2"]},
-    {name: "marketing2", 
-        "preheader" : ["pre2"], 
+    {name: "marketing1", 
+        "preheader" : ["pre1"],
+        "logo" : ["log1"],
         "header" : ["head1"],
-        "body" : ["body2"]},
+        "body" : ["body1","body3", "body5"],
+        "rating_social_legal" : ["rating1","body3", "social_legal1"]},
+    {name: "marketing2", 
+        "preheader" : ["pre5"], 
+        "logo" : ["log9"],
+        "header" : ["head2"],
+        "body" : ["body2","body3", "body6", "body7", "body9"],
+        "rating_social_legal" : ["rating1","body3", "social_legal1"]},
+    {name: "marketing3", 
+        "preheader" : ["pre1"], 
+        "logo" : ["log5"],
+        "header" : ["head3"],
+        "body" : ["body1","body3", "body9"],
+        "rating_social_legal" : ["rating1","body3", "social_legal1"]},
 ]
 
 /* harmony default export */ __webpack_exports__["a"] = (listTemplates);
@@ -1035,10 +1049,28 @@ const header = [
       </table>
     </td>
   </tr>`
+},
+{
+    id:"head3",
+    thumbnail: './imgs/header_noimg.png',
+    content:`<tr>
+    <td class="one-column body-text" style="padding-top:40px; padding-bottom:40px; padding-right:40px; padding-left:40px;background-color:#C41F3E;">
+        <table role="presentation" width="100%" style="border-spacing:0;font-family: 'Whitney A', 'Whitney B', Arial, sans-serif;">
+            <tr>
+                <td style="width:100%;  background-color: #C41F3E; color: #ffffff; font-family: 'Whitney A', 'Whitney B', Arial, sans-serif; text-align:left;font-weight: 500;">
+                    <h1 style="font-family: 'Whitney A', 'Whitney B', Arial, sans-serif; text-align:left;font-weight: 500;font-size:30px;line-height:110%;line-height:1.2!important;">Same Headline bo no img Body <br> Subhead copy</h1>
+                </td>
+            </tr>
+        </table>
+        </td>
+    </tr>`
 }
 ]
 
 /* harmony default export */ __webpack_exports__["a"] = (header);
+
+
+
 
 /***/ }),
 /* 5 */
