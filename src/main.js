@@ -3,6 +3,7 @@ import listTemplates from "./modules/listTemplates";
 import body from "./modules/body"
 import header from "./modules/header"
 import logo from "./modules/logo"
+import rating_social_legal from "./modules/rating_social_legal"
 
 
 
@@ -24,6 +25,7 @@ createApp({
     	logo: [],
 		header: [],
 		body: [],
+		rating_social_legal: [],
 		listItems: [],
 		listSelected: []
 	  }
@@ -32,7 +34,8 @@ createApp({
 	this.logo = logo.slice(0)
 	this.preheader = preheader.slice(0)
 	this.header = header.slice(0)
-	this.body = body.slice(0)	
+	this.body = body.slice(0)
+	this.rating_social_legal = rating_social_legal.slice(0)
 	this.listTemplates = listTemplates.slice(0)
 
 	this.fillBlockList("preheader")
